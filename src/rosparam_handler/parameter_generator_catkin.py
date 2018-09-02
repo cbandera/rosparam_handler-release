@@ -388,6 +388,7 @@ class ParameterGenerator(object):
         to_server = []
         non_default_params = []
         from_config = []
+        to_config = []
         test_limits = []
 
         params = self._get_parameters()
@@ -435,6 +436,7 @@ class ParameterGenerator(object):
             # Test for configurable params
             if param['configurable']:
                 from_config.append(Template('    $name = config.$name;').substitute(name=name))
+                to_config.append(Template('   config.$name = $name;').substitute(name=name))
 
             # Test limits
             if param['is_vector']:
@@ -451,8 +453,12 @@ class ParameterGenerator(object):
                     paramname=full_name, name=name, max=param['max'], type=ttype))
 
             # Add debug output
-            string_representation.append(Template('      << "\t" << p.$namespace << "$name:" << p.$name << '
-                                                  '"\\n"\n').substitute(namespace=namespace, name=name))
+            if param['is_vector'] or param['is_map']:
+                string_representation.append(Template('      << "\t" << p.$namespace << "$name:" << rosparam_handler::to_string(p.$name) << '
+                                                      '"\\n"\n').substitute(namespace=namespace, name=name))
+            else:
+                string_representation.append(Template('      << "\t" << p.$namespace << "$name:" << p.$name << '
+                                                      '"\\n"\n').substitute(namespace=namespace, name=name))
 
         param_entries = "\n".join(param_entries)
         string_representation = "".join(string_representation)
@@ -460,6 +466,7 @@ class ParameterGenerator(object):
         from_server = "\n".join(from_server)
         to_server = "\n".join(to_server)
         from_config = "\n".join(from_config)
+        to_config = "\n".join(to_config)
         test_limits = "\n".join(test_limits)
 
         content = Template(template).substitute(pkgname=self.pkgname, ClassName=self.classname,
@@ -467,7 +474,8 @@ class ParameterGenerator(object):
                                                 fromParamServer=from_server,
                                                 string_representation=string_representation,
                                                 non_default_params=non_default_params, nodename=self.nodename,
-                                                test_limits=test_limits, toParamServer=to_server)
+                                                test_limits=test_limits, toParamServer=to_server,
+                                                toConfig=to_config)
 
         header_file = os.path.join(self.cpp_gen_dir, self.classname + "Parameters.h")
         try:
