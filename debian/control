@@ -1,0 +1,12 @@
+Source: ros-melodic-rosparam-handler
+Section: misc
+Priority: extra
+Maintainer: Jeremie Deray <jeremie.deray@pal-robotics.com>
+Build-Depends: debhelper (>= 9.0.0), ros-melodic-catkin, ros-melodic-dynamic-reconfigure, ros-melodic-roscpp, ros-melodic-rostest
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-melodic-rosparam-handler
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-melodic-catkin
+Description: An easy wrapper for using parameters in ROS.
