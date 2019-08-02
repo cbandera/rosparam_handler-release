@@ -1,3 +1,26 @@
+## rosparam_handler (melodic) - 0.1.4-1
+
+The packages in the `rosparam_handler` repository were released into the `melodic` distro by running `/usr/bin/bloom-release --rosdistro melodic --track melodic rosparam_handler --edit` on `Fri, 02 Aug 2019 12:35:17 -0000`
+
+The `rosparam_handler` package was released.
+
+Version of package(s) in repository `rosparam_handler`:
+
+- upstream repository: https://github.com/cbandera/rosparam_handler.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.1.4-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.15.2`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.40`
+
+
 ## rosparam_handler (lunar) - 0.1.4-0
 
 The packages in the `rosparam_handler` repository were released into the `lunar` distro by running `/usr/bin/bloom-release rosparam_handler --rosdistro lunar` on `Sun, 02 Sep 2018 18:15:24 -0000`
